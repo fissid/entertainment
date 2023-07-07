@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1.1rem;
+}
+
+body {
+  font-family: "Press Start 2P", sans-serif;
+}
+
+.add-qoute::before {
+  content: "<";
+}
+.add-qoute::after {
+  content: ">";
+}
+
+/* Chrome, Safari */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
