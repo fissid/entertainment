@@ -1,10 +1,3 @@
-"use strict";
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// BANKIST APP
-
-// Data
 const account1 = {
   owner: "Jonas Schmedtmann",
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
@@ -13,7 +6,7 @@ const account1 = {
 
   movementsDates: ["2022-11-18T21:31:17.178Z", "2022-12-23T07:42:02.383Z", "2023-01-28T09:15:04.904Z", "2023-04-01T10:17:24.185Z", "2023-07-06T14:11:59.604Z", "2023-07-09T17:01:17.194Z", "2023-07-10T23:36:17.929Z", "2023-07-11T10:51:36.790Z"],
   currency: "EUR",
-  locale: "pt-PT", // de-DE
+  locale: "pt-PT", 
 };
 // console.log(new Date());
 const account2 = {
@@ -203,7 +196,7 @@ btnLogin.addEventListener("click", function (e) {
   }
 });
 
-// // make all thing visible for account1 for testing
+// // make all thing visible for account2 for testing
 // calcBalance(account2);
 // calcSummary(account2);
 // displayMovements(account2);
@@ -273,17 +266,6 @@ btnLoan.addEventListener("click", function (e) {
   }
 });
 
-// // // overal of all movements
-// // const allMovementsArrays = accounts.map((acc) => acc.movements);
-// // const allMovementsValues = allMovementsArrays.flat();
-// // const overalMovements = allMovementsValues.reduce((acc, mov) => acc + mov, 0);
-// // console.log(allMovementsArrays);
-// // console.log(allMovementsValues);
-// // console.log(overalMovements);
-
-// const overalMovements = accounts.flatMap((acc) => acc.movements).reduce((acc, mov) => acc + mov, 0);
-// console.log(overalMovements);
-
 let doSorting = false;
 // sort process
 btnSort.addEventListener("click", function (e) {
@@ -291,11 +273,6 @@ btnSort.addEventListener("click", function (e) {
   refreshDisplayData(logedInAcc, !doSorting);
   doSorting = !doSorting;
 });
-
-// practice 100 of dicerolls
-// // const diceRolls = new Array(100).fill(1).map((cl) => (cl = Math.floor(Math.random() * 6 + 1)));
-// const diceRolls = Array.from({ length: 100 }, () => Math.floor(Math.random() * 6 + 1));
-// console.log(diceRolls);
 
 // // overal of all movements
 // const movementsOveral = accounts
@@ -316,25 +293,6 @@ btnSort.addEventListener("click", function (e) {
 //   .filter((each) => each < 0)
 //   .reduce((acc, each) => acc + each, 0);
 // console.log(movementsWithdraws);
-
-// console.log(`Overal of all movements of the bank: ${movementsDeposits + movementsWithdraws}`);
-
-// // how many deposits which are atleast 1000 dollar
-// const upperThan1K = accounts.flatMap((each) => each.movements).filter((move) => move > 1000).length;
-// console.log(upperThan1K);
-
-// // create an pbject which has both sum of the deposits and withdraws
-// const both = {
-//   sumDeposits: accounts
-//     .flatMap((each) => each.movements)
-//     .filter((each) => each > 0)
-//     .reduce((acc, each) => acc + each, 0),
-//   sumWithdraws: accounts
-//     .map((each) => each.movements)
-//     .flat()
-//     .filter((each) => each < 0)
-//     .reduce((acc, each) => acc + each, 0),
-// };
 
 // make a timer on the top left side of the page
 setInterval(() => {
