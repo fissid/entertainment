@@ -1,3 +1,10 @@
+"use strict";
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// BANKIST APP
+
+// Data
 const account1 = {
   owner: "Jonas Schmedtmann",
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
@@ -6,7 +13,7 @@ const account1 = {
 
   movementsDates: ["2022-11-18T21:31:17.178Z", "2022-12-23T07:42:02.383Z", "2023-01-28T09:15:04.904Z", "2023-04-01T10:17:24.185Z", "2023-07-06T14:11:59.604Z", "2023-07-09T17:01:17.194Z", "2023-07-10T23:36:17.929Z", "2023-07-11T10:51:36.790Z"],
   currency: "EUR",
-  locale: "pt-PT", 
+  locale: "pt-PT", // de-DE
 };
 // console.log(new Date());
 const account2 = {
@@ -29,7 +36,7 @@ const labelBalance = document.querySelector(".balance__value");
 const labelSumIn = document.querySelector(".summary__value--in");
 const labelSumOut = document.querySelector(".summary__value--out");
 const labelSumInterest = document.querySelector(".summary__value--interest");
-const labelTimer = document.querySelector(".timer");
+const labelTimer = document.querySelector(".count-down");
 
 const containerApp = document.querySelector(".app");
 const containerMovements = document.querySelector(".movements");
@@ -74,6 +81,24 @@ const fromatCur = function (value, locale, currency) {
     style: `currency`,
     currency: currency,
   }).format(value);
+};
+
+const timer = function () {
+  let time = 120;
+  const countDown = setInterval(function () {
+    const minute = String(Math.trunc(time / 60)).padStart(2, 0);
+    const second = String(time % 60).padStart(2, 0);
+    labelTimer.textContent = `${minute}:${second}`;
+
+    if (time === 0) {
+      clearInterval(countDown);
+      containerApp.style.opacity = "0";
+      labelWelcome.textContent = `Log in to get started`;
+    }
+
+    time--;
+  }, 1000);
+  return countDown;
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -152,6 +177,7 @@ const refreshDisplayData = function (acc, sort = false) {
 };
 
 // login process
+let countDown;
 let logedInAcc;
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault();
@@ -185,6 +211,8 @@ btnLogin.addEventListener("click", function (e) {
       clearInputFields();
       // clear focus on input
       inputLoginPin.blur();
+      if (countDown) clearInterval(countDown);
+      countDown = timer();
     } else {
       alert("Wrong Password");
       inputLoginPin.value = "";
@@ -196,7 +224,7 @@ btnLogin.addEventListener("click", function (e) {
   }
 });
 
-// // make all thing visible for account2 for testing
+// // make all thing visible for account1 for testing
 // calcBalance(account2);
 // calcSummary(account2);
 // displayMovements(account2);
@@ -216,6 +244,8 @@ btnTransfer.addEventListener("click", function (e) {
       // add transfer date
       logedInAcc.movementsDates.push(new Date());
       accToTransfer.movementsDates.push(new Date());
+      if (countDown) clearInterval(countDown);
+      countDown = timer();
       refreshDisplayData(logedInAcc);
       accToTransfer.movements.push(valToTransfer);
       clearTransferInputs();
@@ -258,6 +288,8 @@ btnLoan.addEventListener("click", function (e) {
       logedInAcc.movementsDates.push(new Date());
       refreshDisplayData(logedInAcc);
     }, 3000);
+    if (countDown) clearInterval(countDown);
+    countDown = timer();
     inputLoanAmount.value = "";
     inputLoanAmount.blur();
   } else {
@@ -266,6 +298,17 @@ btnLoan.addEventListener("click", function (e) {
   }
 });
 
+// // // overal of all movements
+// // const allMovementsArrays = accounts.map((acc) => acc.movements);
+// // const allMovementsValues = allMovementsArrays.flat();
+// // const overalMovements = allMovementsValues.reduce((acc, mov) => acc + mov, 0);
+// // console.log(allMovementsArrays);
+// // console.log(allMovementsValues);
+// // console.log(overalMovements);
+
+// const overalMovements = accounts.flatMap((acc) => acc.movements).reduce((acc, mov) => acc + mov, 0);
+// console.log(overalMovements);
+
 let doSorting = false;
 // sort process
 btnSort.addEventListener("click", function (e) {
@@ -273,6 +316,11 @@ btnSort.addEventListener("click", function (e) {
   refreshDisplayData(logedInAcc, !doSorting);
   doSorting = !doSorting;
 });
+
+// practice 100 of dicerolls
+// // const diceRolls = new Array(100).fill(1).map((cl) => (cl = Math.floor(Math.random() * 6 + 1)));
+// const diceRolls = Array.from({ length: 100 }, () => Math.floor(Math.random() * 6 + 1));
+// console.log(diceRolls);
 
 // // overal of all movements
 // const movementsOveral = accounts
@@ -293,6 +341,25 @@ btnSort.addEventListener("click", function (e) {
 //   .filter((each) => each < 0)
 //   .reduce((acc, each) => acc + each, 0);
 // console.log(movementsWithdraws);
+
+// console.log(`Overal of all movements of the bank: ${movementsDeposits + movementsWithdraws}`);
+
+// // how many deposits which are atleast 1000 dollar
+// const upperThan1K = accounts.flatMap((each) => each.movements).filter((move) => move > 1000).length;
+// console.log(upperThan1K);
+
+// // create an pbject which has both sum of the deposits and withdraws
+// const both = {
+//   sumDeposits: accounts
+//     .flatMap((each) => each.movements)
+//     .filter((each) => each > 0)
+//     .reduce((acc, each) => acc + each, 0),
+//   sumWithdraws: accounts
+//     .map((each) => each.movements)
+//     .flat()
+//     .filter((each) => each < 0)
+//     .reduce((acc, each) => acc + each, 0),
+// };
 
 // make a timer on the top left side of the page
 setInterval(() => {
