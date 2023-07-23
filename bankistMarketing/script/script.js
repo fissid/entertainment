@@ -190,4 +190,78 @@ const popUpSections = function () {
     sec.classList.add("section--hidden");
   });
 };
-popUpSections();
+// popUpSections();
+
+const sliderApp = function () {
+  const slider = document.querySelector(".slider");
+  const slides = document.querySelectorAll(".slide");
+  const rightBtn = document.querySelector(".slider__btn--right");
+  const leftBtn = document.querySelector(".slider__btn--left");
+  const dots = document.querySelector(".dots");
+  const maxSlide = slides.length;
+  let currentSlide = 0;
+
+  slides.forEach(function (slide, index) {
+    slide.style.transform = `translateX(${index * 100}%)`;
+  });
+
+  const goToSlide = function (tmp) {
+    slides.forEach(function (slide, index) {
+      slide.style.transform = `translateX(${100 * (index - tmp)}%)`;
+    });
+  };
+
+  const nextSlide = function () {
+    if (currentSlide === maxSlide - 1) {
+      currentSlide = 0;
+    } else {
+      currentSlide++;
+    }
+    goToSlide(currentSlide);
+    activeDot(currentSlide);
+  };
+
+  const prevSlide = function () {
+    if (currentSlide === 0) {
+      currentSlide = maxSlide - 1;
+    } else {
+      currentSlide--;
+    }
+    goToSlide(currentSlide);
+    activeDot(currentSlide);
+  };
+
+  leftBtn.addEventListener("click", prevSlide);
+  rightBtn.addEventListener("click", nextSlide);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") nextSlide();
+    else if (e.key === "ArrowLeft") prevSlide();
+  });
+
+  const addDot = function () {
+    slides.forEach(function (slide, index) {
+      dots.insertAdjacentHTML("beforeend", `<button class="dots__dot" data-slide="${index}"></button>`);
+    });
+  };
+
+  const activeDot = function (activeSlide) {
+    document.querySelectorAll(".dots__dot").forEach((dot) => {
+      dot.classList.remove("dots__dot--active");
+    });
+    document.querySelector(`.dots__dot[data-slide="${activeSlide}"]`).classList.add("dots__dot--active");
+  };
+
+  dots.addEventListener("click", function (e) {
+    if (e.target.classList.contains("dots__dot")) {
+      const specificSlide = e.target.dataset.slide;
+      goToSlide(specificSlide);
+      activeDot(specificSlide);
+    }
+  });
+
+  goToSlide(0);
+  addDot();
+  activeDot(0);
+};
+sliderApp();
