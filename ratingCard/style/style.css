@@ -1,51 +1,72 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: "Outfit", sans-serif;
-  background: hsl(212, 45%, 89%) !important;
-}
-
-.card,
-.card img {
-  border-radius: 10px !important;
-}
-
-.top {
-  width: 100% !important;
-}
-
-.top img {
-  width: 100%;
-  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background: hsl(216, 12%, 8%) !important;
 }
 
 .card {
-  width: 350px !important;
+  background: hsl(213, 19%, 18%) !important;
+  border-radius: 20px !important;
+  max-width: 350px;
+  margin: 10em 0;
 }
 
-h5 {
-  font-weight: 700 !important;
+.star,
+.rate {
+  background: hsl(213, 20%, 25%) !important;
+  margin: 0 0.3em;
+  padding: 0.5em 0.7em;
+  border-radius: 50%;
+  .fa {
+    color: orange;
+    font-size: 0.8em;
+  }
 }
 
-p {
-  font-weight: 400 !important;
+.small {
+  color: hsl(217, 12%, 63%) !important;
+}
+
+.rate {
+  padding: 0.5em 1em;
+  color: hsl(217, 12%, 63%);
+}
+.rate:hover {
+  background: darkorange !important;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.submit button {
+  border-radius: 20px;
+  background: darkorange;
+  font-weight: 500;
+}
+
+.submit button:hover {
+  background: #fff;
+  color: darkorange !important;
+  transition: all 0.3s;
+}
+
+.message p {
+  background: hsl(213, 20%, 25%) !important;
+  display: inline-block;
+  color: darkorange;
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  border-radius: 20px;
+}
+
+.sibling {
+  background: hsl(217, 12%, 63%) !important;
+  color: #fff;
+  transition: all 1s;
 }
 
 @media (max-width: 376px) {
   .card {
-    width: 300px !important;
-    margin: 0 15px;
-  }
-
-  h5 {
-    font-size: 15px !important;
-  }
-  p {
-    font-size: 12px !important;
   }
 }
