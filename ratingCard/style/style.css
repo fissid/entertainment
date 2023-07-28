@@ -68,5 +68,6 @@ body {
 
 @media (max-width: 376px) {
   .card {
+    margin: 10em 2em;
   }
 }
