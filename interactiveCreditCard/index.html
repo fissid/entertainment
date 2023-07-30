@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <title>Interactive card details form</title>
+  </head>
+  <body>
+    <main class="h-100">
+      <div class="bottom d-flex flex-row h-100">
+        <div class="left"></div>
+        <div class="top"></div>
+        <div class="right w-100 d-flex align-items-center justify-content-center text-uppercase pl-5">
+          <div class="added text-center w-25 d-none">
+            <img src="./img/icon-complete.svg" alt="" />
+            <h2 class="py-4">Thank You!</h2>
+            <p class="pb-4 text-secondary">We've added your card details</p>
+            <button class="btn btn-block btn-lg my-4 reload">Reload</button>
+          </div>
+          <form class="" action="#">
+            <div class="form-group py-1">
+              <label for="name" class="h6" s>cardholder name</label>
+              <!-- just add is-invalid class to input show the feedback -->
+              <input class="form-control" type="text" name="name" placeholder="e.q. Jane Appleseed" id="name" />
+              <div class="invalid-feedback">
+                <p class="mb-0">name can not be blank</p>
+              </div>
+            </div>
+            <div class="form-group py-1">
+              <label for="number" class="h6">card number</label>
+              <!-- just add is-invalid class to input show the feedback -->
+              <input class="form-control" type="text" placeholder="e.q. 1234 5678 9101 1121 1415" id="num" />
+              <div class="invalid-feedback">
+                <p class="mb-0">please re-check card number</p>
+              </div>
+            </div>
+            <div class="input-group d-flex justify-content-between py-1">
+              <div class="form-group date">
+                <label for="exp" class="h6">exp. date (mm/yy)</label>
+                <div class="input-group">
+                  <!-- just add is-invalid class to input show red border -->
+                  <input class="form-control" type="number" placeholder="MM" id="month" />
+                  <input class="form-control ml-2" type="number" placeholder="YY" id="year" />
+                </div>
+              </div>
+              <div class="form-group cvv">
+                <label for="cvv" class="h6">cvv</label>
+                <div class="input-group">
+                  <!-- just add is-invalid class to input show red border -->
+                  <input class="form-control" type="number" placeholder="e.g. 123" id="cvv" />
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-block btn-lg my-3 submit">Confirm</button>
+          </form>
+        </div>
+      </div>
+      <div class="overlay">
+        <div class="front">
+          <img src="./img/bg-card-front.png" alt="" />
+          <img src="./img/card-logo.svg" class="p-4" alt="" />
+          <span class="lead cart-number">0000 0000 0000 0000</span>
+          <div class="info d-flex align-items-center justify-content-between">
+            <span class="text-uppercase card-name">Steve Jobs</span>
+            <span><span class="card-month">00</span>/ <span class="card-year">00</span></span>
+          </div>
+        </div>
+        <div class="back">
+          <img src="./img/bg-card-back.png" alt="" />
+          <span class="card-cvv">000</span>
+        </div>
+      </div>
+    </main>
+    <script src="./script/script.js"></script>
+  </body>
+</html>
